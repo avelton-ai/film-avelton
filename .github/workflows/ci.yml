@@ -15,10 +15,13 @@ env:
   CARGO_PROFILE_DEV_DEBUG: '0'
   CARGO_PROFILE_TEST_DEBUG: '0'
   CARGO_BUILD_JOBS: '2'
+  # Keep optimized tests while avoiding thin-LTO on every workspace test executable.
+  CARGO_PROFILE_RELEASE_LTO: 'false'
+  CARGO_PROFILE_RELEASE_CODEGEN_UNITS: '16'
 jobs:
   quality:
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 240
     steps:
     - uses: actions/checkout@v4
     - name: Native dependencies
