@@ -18,6 +18,7 @@ env:
   # Keep optimized tests while avoiding thin-LTO on every workspace test executable.
   CARGO_PROFILE_RELEASE_LTO: 'false'
   CARGO_PROFILE_RELEASE_CODEGEN_UNITS: '16'
+  FILMCRAFT_REQUIRE_GPU: '1'
 jobs:
   quality:
     runs-on: ubuntu-24.04
@@ -27,7 +28,8 @@ jobs:
     - name: Native dependencies
       run: |-
         sudo apt-get update
-        sudo apt-get install -y --no-install-recommends libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libgtk-3-dev libasound2-dev libudev-dev libxcb-shape0-dev libxcb-xfixes0-dev
+        sudo apt-get install -y --no-install-recommends libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libgtk-3-dev libasound2-dev libudev-dev libxcb-shape0-dev libxcb-xfixes0-dev libvulkan1 mesa-vulkan-drivers vulkan-tools
+        vulkaninfo --summary
     - uses: dtolnay/rust-toolchain@stable
       with:
         components: rustfmt,clippy
