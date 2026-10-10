@@ -4,16 +4,20 @@ use filmcraft_render::Blend;
 use filmcraft_render::plan::execute_cpu;
 
 fn device() -> Option<(wgpu::Device, wgpu::Queue)> {
-    let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor { backends: wgpu::Backends::PRIMARY, ..Default::default() });
+    let instance =
+        wgpu::Instance::new(wgpu::InstanceDescriptor { backends: wgpu::Backends::PRIMARY, ..wgpu::InstanceDescriptor::new_without_display_handle() });
     let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()));
     assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || adapter.is_ok(), "CI requires a Vulkan GPU adapter: {adapter:?}");
     let adapter = adapter.ok()?;
-    pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())).ok()
+    eprintln!("GPU parity adapter: {:?}", adapter.get_info());
+    let device = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default()));
+    assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || device.is_ok(), "CI requires a GPU device: {device:?}");
+    device.ok()
 }
 
 #[test]
 fn opengl_effects_fall_back_to_cpu_without_panicking() {
-    let instance = wgpu::Instance::new(&wgpu::InstanceDescriptor { backends: wgpu::Backends::GL, ..Default::default() });
+    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor { backends: wgpu::Backends::GL, ..wgpu::InstanceDescriptor::new_without_display_handle() });
     let Ok(adapter) = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default())) else { return };
     let Ok((dev, q)) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())) else { return };
     let mut c = GpuCompositor::new(&dev, &q);
