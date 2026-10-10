@@ -21,7 +21,7 @@ pub const ISSUES: &str = "https://github.com/avelton-ai/film-avelton/issues";
 pub const ALL: [(&str, &str, &str); 5] = [
     ("help.discord", "Avelton support…", DISCORD),
     ("help.website", "Avelton Website", WEBSITE),
-    ("help.appPage", "Film Avelton on getartcraft.com", APP_PAGE),
+    ("help.appPage", "Film Avelton on avelton.online", APP_PAGE),
     ("help.github", "Film Avelton on GitHub", GITHUB),
     ("help.reportIssue", "Report an Issue…", ISSUES),
 ];
@@ -41,9 +41,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn urls_follow_the_artcraft_scheme() {
-        assert_eq!(APP_PAGE, format!("{WEBSITE}/apps/{APP}"));
-        assert_eq!(GITHUB, format!("https://github.com/storytold/{APP}"));
+    fn urls_point_to_avelton() {
+        assert_eq!(APP_PAGE, "https://film.avelton.online");
+        assert_eq!(GITHUB, "https://github.com/avelton-ai/film-avelton");
         assert!(ALL.iter().all(|(id, _, u)| id.starts_with("help.") && u.starts_with("https://")));
         assert_eq!(url_for("help.discord"), Some(DISCORD));
         assert_eq!(url_for("help.nope"), None);

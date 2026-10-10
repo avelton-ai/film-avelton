@@ -124,7 +124,7 @@ pub const UI_COMMANDS: &[UiCommand] = &[
     uic!("mode.export", "Export", ["File", "Export"], Some("Cmd+M")),
     uic!("help.discord", "Avelton support…", ["Help"], None),
     uic!("help.website", "Avelton Website", ["Help"], None),
-    uic!("help.appPage", "Film Avelton on getartcraft.com", ["Help"], None),
+    uic!("help.appPage", "Film Avelton on avelton.online", ["Help"], None),
     uic!("help.github", "Film Avelton on GitHub", ["Help"], None),
     uic!("help.reportIssue", "Report an Issue…", ["Help"], None),
     uic!("help.revealLogFiles", "Reveal Log Files…", ["Help"], None),
