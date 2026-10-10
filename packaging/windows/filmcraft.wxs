@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  FilmCraft MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
+  Film Avelton MSI (WiX Toolset v5: `dotnet tool install -g wix`). Built by package.ps1:
 
     wix build filmcraft.wxs -arch x64 -d Version=1.2.3 -d BinDir=... -d IconPath=... -o out.msi
 
@@ -8,50 +8,57 @@
 -->
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Package
-      Name="FilmCraft"
-      Manufacturer="Learning Machines LLC"
+      Name="Film Avelton"
+      Manufacturer="Avelton"
       Version="$(var.Version)"
-      UpgradeCode="31E6FB14-9DBC-41DD-B24B-26B71FB31B62"
+      UpgradeCode="82F906CA-9C5A-5812-8EF2-A5C42FC885C0"
       Scope="perMachine"
       Compressed="yes"
       Language="1033">
-    <SummaryInformation Description="FilmCraft video editor" Manufacturer="Learning Machines LLC" />
+    <SummaryInformation Description="Film Avelton video editor" Manufacturer="Avelton" />
     <!-- Same-version upgrades let successive pre-releases of one X.Y.Z replace each other
          (MSI versions are numeric, so 1.2.3-rc.1 and 1.2.3-rc.2 are both 1.2.3). -->
     <MajorUpgrade AllowSameVersionUpgrades="yes"
-        DowngradeErrorMessage="A newer version of FilmCraft is already installed." />
+        DowngradeErrorMessage="A newer version of Film Avelton is already installed." />
     <MediaTemplate EmbedCab="yes" CompressionLevel="high" />
 
     <Icon Id="FilmcraftIcon.ico" SourceFile="$(var.IconPath)" />
     <Property Id="ARPPRODUCTICON" Value="FilmcraftIcon.ico" />
-    <Property Id="ARPURLINFOABOUT" Value="https://getartcraft.com/apps/filmcraft" />
-    <Property Id="ARPURLUPDATEINFO" Value="https://getartcraft.com/apps/filmcraft" />
-    <Property Id="ARPHELPLINK" Value="https://discord.gg/artcraft" />
+    <Property Id="ARPURLINFOABOUT" Value="https://film.avelton.online" />
+    <Property Id="ARPURLUPDATEINFO" Value="https://film.avelton.online" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/avelton-ai/film-avelton/issues" />
 
     <StandardDirectory Id="ProgramFiles6432Folder">
-      <Directory Id="INSTALLFOLDER" Name="FilmCraft" />
+      <Directory Id="INSTALLFOLDER" Name="Film Avelton" />
     </StandardDirectory>
     <StandardDirectory Id="ProgramMenuFolder" />
 
-    <Feature Id="Main" Title="FilmCraft" Level="1">
+    <Feature Id="Main" Title="Film Avelton" Level="1">
       <ComponentGroupRef Id="FilmcraftFiles" />
     </Feature>
   </Package>
 
   <Fragment>
     <ComponentGroup Id="FilmcraftFiles" Directory="INSTALLFOLDER">
-      <Component Id="FilmcraftApp" Guid="15933017-925B-4963-8992-52000EB26AAA">
-        <File Id="FilmcraftExe" Source="$(var.BinDir)\filmcraft.exe" KeyPath="yes">
-          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="FilmCraft"
-              Description="FilmCraft video editor" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
+      <Component Id="FilmcraftApp" Guid="D387950C-BED7-5B7C-BF57-D760D5D4DF6E">
+        <File Id="FilmcraftExe" Source="$(var.BinDir)\film-avelton.exe" KeyPath="yes">
+          <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="Film Avelton"
+              Description="Film Avelton video editor" WorkingDirectory="INSTALLFOLDER" Advertise="yes"
               Icon="FilmcraftIcon.ico" IconIndex="0" />
         </File>
 
-        <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\filmcraft.exe" Value="[#FilmcraftExe]" Type="string" />
+        <RegistryValue Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\App Paths\film-avelton.exe" Value="[#FilmcraftExe]" Type="string" />
       </Component>
 
       <Component Id="FilmcraftCli">
-        <File Id="FilmcraftCliExe" Source="$(var.BinDir)\filmcraft-cli.exe" KeyPath="yes" />
+        <File Id="FilmcraftCliExe" Source="$(var.BinDir)\film-avelton-cli.exe" KeyPath="yes" />
+      </Component>
+      <Component Id="AveltonNotices" Guid="60681244-7E1A-5DB1-83B0-8B909FB9096D">
+        <File Id="AveltonNotice0" Source="$(sys.SOURCEFILEDIR)..\..\NOTICE" />
+        <File Id="AveltonNotice1" Source="$(sys.SOURCEFILEDIR)..\..\avelton.json" />
+        <File Id="AveltonNotice2" Source="$(sys.SOURCEFILEDIR)..\..\assets\fonts\OFL-Inter.txt" />
+        <File Id="AveltonNotice3" Source="$(sys.SOURCEFILEDIR)..\..\assets\fonts\OFL-JetBrainsMono.txt" />
+        <File Id="AveltonNotice4" Source="$(sys.SOURCEFILEDIR)..\..\assets\fonts\OFL-NotoSerif.txt" />
       </Component>
     </ComponentGroup>
   </Fragment>

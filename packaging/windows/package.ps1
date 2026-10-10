@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-  Build, sign and package FilmCraft for Windows.
+  Build, sign and package Film Avelton for Windows.
 
 .DESCRIPTION
   Produces, in $env:DIST (default: dist/release):
@@ -53,7 +53,7 @@ New-Item -ItemType Directory -Force -Path $Dist | Out-Null
 if (-not $env:FILMCRAFT_BUILD_SHA) { $env:FILMCRAFT_BUILD_SHA = (git -C $Root rev-parse HEAD 2>$null) }
 if (-not $env:FILMCRAFT_BUILD_DATE) { $env:FILMCRAFT_BUILD_DATE = (Get-Date).ToUniversalTime().ToString('yyyy-MM-dd') }
 
-Write-Output "FilmCraft $Version for Windows $Arch ($Target)"
+Write-Output "Film Avelton $Version for Windows $Arch ($Target)"
 
 if (-not $SkipBuild) {
   # Static CRT: no VC++ redistributable needed. Scoped to the target so host build scripts and
@@ -83,15 +83,23 @@ foreach ($check in @(@('filmcraft.exe', 2), @('filmcraft-cli.exe', 3))) {
   if ($h.Subsystem -ne $check[1]) { throw "$($check[0]) has PE subsystem $($h.Subsystem), expected $($check[1])" }
   Write-Output "ok $($check[0]): $Arch, PE subsystem $($h.Subsystem)"
 }
-$Stage = Join-Path $TargetDir "windows-package\$Arch"
-Remove-Item -Recurse -Force $Stage -ErrorAction SilentlyContinue
-New-Item -ItemType Directory -Force -Path $Stage | Out-Null
-Copy-Item (Join-Path $Bin 'filmcraft.exe'), (Join-Path $Bin 'filmcraft-cli.exe') $Stage
+function Remove-PackageDirectory([string] $Path) {
+  $absolute = [IO.Path]::GetFullPath($Path)
+  $boundary = [IO.Path]::GetFullPath($TargetDir).TrimEnd('\', '/') + [IO.Path]::DirectorySeparatorChar
+  if (-not $absolute.StartsWith($boundary, [StringComparison]::OrdinalIgnoreCase)) { throw 'package path outside target directory' }
+  if (Test-Path -LiteralPath $absolute) { Remove-Item -LiteralPath $absolute -Recurse -Force }
+}
 
-& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'filmcraft.exe') (Join-Path $Stage 'filmcraft-cli.exe')
+$Stage = Join-Path $TargetDir "windows-package\$Arch"
+Remove-PackageDirectory $Stage
+New-Item -ItemType Directory -Force -Path $Stage | Out-Null
+Copy-Item -LiteralPath (Join-Path $Bin 'filmcraft.exe') -Destination (Join-Path $Stage 'film-avelton.exe')
+Copy-Item -LiteralPath (Join-Path $Bin 'filmcraft-cli.exe') -Destination (Join-Path $Stage 'film-avelton-cli.exe')
+
+& (Join-Path $PSScriptRoot 'sign.ps1') (Join-Path $Stage 'film-avelton.exe') (Join-Path $Stage 'film-avelton-cli.exe')
 
 # ---- MSI ---------------------------------------------------------------------------------------
-$Msi = Join-Path $Dist "filmcraft-$Version-windows-$Arch.msi"
+$Msi = Join-Path $Dist "film-avelton-$Version-windows-$Arch.msi"
 Invoke-Native 'wix build' {
   wix build (Join-Path $PSScriptRoot 'filmcraft.wxs') -arch $Arch `
     -d "Version=$MsiVersion" -d "BinDir=$Stage" -d "IconPath=$(Join-Path $Root 'assets\app-icon\filmcraft.ico')" `
@@ -102,16 +110,16 @@ Remove-Item -Force -ErrorAction SilentlyContinue ([IO.Path]::ChangeExtension($Ms
 & (Join-Path $PSScriptRoot 'sign.ps1') $Msi
 
 # ---- portable zip ------------------------------------------------------------------------------
-$Portable = Join-Path $TargetDir "windows-package\filmcraft-$Version-windows-$Arch-portable"
-Remove-Item -Recurse -Force $Portable -ErrorAction SilentlyContinue
+$Portable = Join-Path $TargetDir "windows-package\film-avelton-$Version-windows-$Arch-portable"
+Remove-PackageDirectory $Portable
 New-Item -ItemType Directory -Force -Path $Portable | Out-Null
 Copy-Item (Join-Path $Stage '*.exe') $Portable
-# The marker that makes FilmCraft keep its data in .\data next to the exe instead of %APPDATA% (#139).
+# The marker that makes Film Avelton keep its data in .\data next to the exe instead of %APPDATA% (#139).
 Set-Content -Encoding ascii -Path (Join-Path $Portable 'portable.txt') -Value @(
-  'FilmCraft portable: preferences, presets, logs and crash recovery are kept in the data folder',
-  'next to filmcraft.exe. Delete this file to use %APPDATA%\FilmCraft instead.'
+  'Film Avelton portable: preferences, presets, logs and crash recovery are kept in the data folder',
+  'next to filmcraft.exe. Delete this file to use %APPDATA%\Film Avelton instead.'
 )
-foreach ($f in 'README.md', 'LICENSE', 'LICENSE-MIT', 'LICENSE-APACHE') {
+foreach ($f in 'README.md', 'LICENSE', 'LICENSE-MIT', 'LICENSE-APACHE', 'NOTICE', 'avelton.json') {
   $p = Join-Path $Root $f
   if (Test-Path $p) { Copy-Item $p $Portable }
 }
@@ -121,7 +129,7 @@ if ($env:CRAFT_FONTS_DIR) {
     Copy-Item $lic.FullName (Join-Path $Portable "OFL-$($lic.Directory.Name).txt")
   }
 }
-$Zip = Join-Path $Dist "filmcraft-$Version-windows-$Arch-portable.zip"
+$Zip = Join-Path $Dist "film-avelton-$Version-windows-$Arch-portable.zip"
 Remove-Item -Force $Zip -ErrorAction SilentlyContinue
 Compress-Archive -Path $Portable -DestinationPath $Zip
 
@@ -129,7 +137,7 @@ Compress-Archive -Path $Portable -DestinationPath $Zip
 # here; .github/workflows/windows-arm64.yml installs and runs it on ARM64 instead.
 $HostArch = [System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString().ToLowerInvariant()
 if ($Arch -ne 'arm64' -or $HostArch -eq 'arm64') {
-  Invoke-Native 'filmcraft-cli --version' { & (Join-Path $Stage 'filmcraft-cli.exe') --version }
+  Invoke-Native 'filmcraft-cli --version' { & (Join-Path $Stage 'film-avelton-cli.exe') --version }
 } else {
   Write-Output "skipping filmcraft-cli --version: an $Arch build doesn't run on this $HostArch machine"
 }

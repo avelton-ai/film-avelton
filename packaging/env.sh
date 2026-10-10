@@ -48,8 +48,11 @@ warn() {
 # craft-fonts fonts the build embedded (only when built with CRAFT_FONTS_DIR).
 copy_docs() {
   local dest="$1" f
-  for f in README.md LICENSE LICENSE-MIT LICENSE-APACHE COPYRIGHT; do
+  for f in README.md LICENSE LICENSE-MIT LICENSE-APACHE COPYRIGHT NOTICE avelton.json; do
     if [ -f "$ROOT/$f" ]; then cp "$ROOT/$f" "$dest/"; fi
+  done
+  for f in "$ROOT"/assets/fonts/OFL-*.txt; do
+    [ ! -f "$f" ] || cp "$f" "$dest/"
   done
   copy_font_licences "$dest"
 }

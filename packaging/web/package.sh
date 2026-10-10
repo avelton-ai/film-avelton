@@ -23,7 +23,7 @@ if grep -Eq '(src|href)="/[^/]' "$SITE/index.html"; then
   exit 1
 fi
 
-NAME="filmcraft-web-$VERSION"
+NAME="film-avelton-web-$VERSION"
 WORK="$CARGO_TARGET_DIR/web-package"
 rm -rf "$WORK"
 mkdir -p "$WORK/$NAME"

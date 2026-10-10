@@ -1,12 +1,12 @@
-# Releasing FilmCraft
+# Releasing Film Avelton
 
 Every push to the `release` branch runs `.github/workflows/release.yml`. The workflow builds
 installers for macOS, Windows, Linux (AppImage, deb, rpm, tarball, Flatpak) and FreeBSD, plus
 the web build, and creates or updates a **draft**
-GitHub Release named `FilmCraft v<version>`. Nobody sees a draft until a maintainer publishes it.
+GitHub Release named `Film Avelton v<version>`. Nobody sees a draft until a maintainer publishes it.
 
-User-facing names say **FilmCraft**. Files, binaries and ids stay lowercase
-(`filmcraft-<version>-<platform>-<arch>.<ext>`, `ai.storyteller.filmcraft`).
+User-facing names say **Film Avelton**. Files, binaries and ids stay lowercase
+(`filmcraft-<version>-<platform>-<arch>.<ext>`, `online.avelton.film`).
 
 ## Cutting a release
 
@@ -19,10 +19,10 @@ User-facing names say **FilmCraft**. Files, binaries and ids stay lowercase
    ```
 
    Commit the change (`Cargo.toml` + `Cargo.lock`) through the normal review flow, as a
-   `Release: FilmCraft v0.3.0` commit whose message says what changed for users.
+   `Release: Film Avelton v0.3.0` commit whose message says what changed for users.
 2. **Merge `main` into `release`** (or fast-forward it) and push. The workflow starts by itself.
 3. **Wait for the draft.** When every job is done (macOS notarization is the slow part), the
-   Releases page has a draft `FilmCraft v0.3.0`, targeting the pushed commit, with every artifact
+   Releases page has a draft `Film Avelton v0.3.0`, targeting the pushed commit, with every artifact
    and `SHA256SUMS.txt`. The notes are generated from the merged pull requests.
 4. **Check it.** Download an installer or two and read the job summaries. A `::warning::` there
    means a signing secret was missing and that artifact is unsigned.
@@ -67,9 +67,9 @@ deliberately, in every job at once.
 ### macOS
 
 `packaging/macos/package.sh` builds `aarch64-apple-darwin` and `x86_64-apple-darwin` with
-`MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo` and assembles `FilmCraft.app`:
+`MACOSX_DEPLOYMENT_TARGET=11.0`, joins them with `lipo` and assembles `Film Avelton.app`:
 
-- `Info.plist` is generated from `Info.plist.in` (bundle id `ai.storyteller.filmcraft`, the
+- `Info.plist` is generated from `Info.plist.in` (bundle id `online.avelton.film`, the
   version and the build commit).
 - **Signing** uses the hardened runtime and a secure timestamp, with the entitlements in
   `entitlements.plist`. The Developer ID certificate is imported into a temporary keychain by
@@ -78,7 +78,7 @@ deliberately, in every job at once.
   and checked with `stapler validate`. The app goes on a DMG (`hdiutil makehybrid`), which is
   signed and notarized too. The universal `filmcraft-cli` is signed the same way, zipped, and the zip is notarized.
   Its Finder window (background, icon size and positions) comes from
-  [`packaging/macos/dmg/`](../packaging/macos/dmg/README.md), and its volume is named `FilmCraft`
+  [`packaging/macos/dmg/`](../packaging/macos/dmg/README.md), and its volume is named `Film Avelton`
   without the version, which the window's background needs; the DMG file name keeps the version.
 
 Locally, without certificates, the script signs ad hoc and skips notarization, which is enough to
@@ -132,11 +132,11 @@ release. The job checks both with `--appimage-updateinformation` and `test -s`.
 
 **Flatpak.** The `flatpak` jobs (x86_64 on `ubuntu-24.04`, aarch64 on `ubuntu-24.04-arm`) run
 `packaging/linux/flatpak-bundle.sh` on the Linux job's tarball: it installs the binaries with
-`packaging/linux/flatpak/ai.storyteller.filmcraft.bundle.yml` into a single-file bundle,
+`packaging/linux/flatpak/online.avelton.film.bundle.yml` into a single-file bundle,
 `filmcraft-<v>-linux-<arch>.flatpak` (no Rust build, so it takes a minute), then installs it and
 runs `filmcraft-cli --version` in the sandbox. Users install it with
 `flatpak install --user <file>`; the freedesktop runtime comes from Flathub.
-`packaging/linux/flatpak/ai.storyteller.filmcraft.yml` is the from-source manifest for a Flathub
+`packaging/linux/flatpak/online.avelton.film.yml` is the from-source manifest for a Flathub
 submission (its header says how to build it). Both manifests must keep the same runtime and
 `finish-args` (packaging-lint checks this).
 
@@ -161,7 +161,7 @@ the crate's version exactly, `WASM_BINDGEN` in `xtask/src/main.rs`) and zips the
 ## The draft release
 
 The last job waits for every build, downloads their artifacts, writes `SHA256SUMS.txt` and creates
-the draft `FilmCraft v<version>` with notes generated from the merged pull requests. If the draft
+the draft `Film Avelton v<version>` with notes generated from the merged pull requests. If the draft
 already exists, it replaces its assets and keeps it a draft. If that version is already published,
 the job fails and asks for a version bump (`cargo xtask version set`).
 

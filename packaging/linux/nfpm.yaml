@@ -3,7 +3,7 @@
 # exports VERSION and NFPM_ARCH.
 #
 #   nfpm package -f packaging/linux/nfpm.yaml -p deb -t dist/release/
-name: filmcraft
+name: film-avelton
 arch: ${NFPM_ARCH}
 platform: linux
 version: ${VERSION}
@@ -13,8 +13,8 @@ release: 1
 section: video
 priority: optional
 maintainer: ${FILMCRAFT_MAINTAINER}
-vendor: Learning Machines LLC
-homepage: https://getartcraft.com/apps/filmcraft
+vendor: Avelton
+homepage: https://film.avelton.online
 license: MIT OR Apache-2.0
 description: |-
   Open-source, native video editor: edit video, color and sound.
@@ -61,11 +61,11 @@ overrides:
       - xdg-desktop-portal
 
 contents:
-  - src: ${STAGE}/usr/bin/filmcraft
-    dst: /usr/bin/filmcraft
+  - src: ${STAGE}/usr/bin/film-avelton
+    dst: /usr/bin/film-avelton
     file_info: { mode: 0755 }
-  - src: ${STAGE}/usr/bin/filmcraft-cli
-    dst: /usr/bin/filmcraft-cli
+  - src: ${STAGE}/usr/bin/film-avelton-cli
+    dst: /usr/bin/film-avelton-cli
     file_info: { mode: 0755 }
   - src: ${STAGE}/usr/share/
     dst: /usr/share/

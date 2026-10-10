@@ -1,6 +1,6 @@
 # Project files
 
-FilmCraft projects are `.fcproj` files: UTF-8 JSON with an explicit schema version. Reading and
+Film Avelton projects are `.fcproj` files: UTF-8 JSON with an explicit schema version. Reading and
 writing them is `crates/format` (`filmcraft-format`); the engine's `file.*` commands use it.
 
 ## Format
@@ -9,7 +9,7 @@ writing them is `crates/format` (`filmcraft-format`); the engine's `file.*` comm
 {
   "format": "filmcraft.project",
   "schema_version": 13,
-  "generator": "FilmCraft 0.1.0",
+  "generator": "Film Avelton 0.1.0",
   "project": { "name": "…", "settings": { … }, "root": { … }, "items": { … }, "next_id": 48 },
   "view": { "open_sequences": [21, 50], "active_sequence": 50, "sequences": { "21": { "pps": 40.0, "scroll": 0.0, … } } }
 }
@@ -72,16 +72,16 @@ But when new data would make the file unreadable to an older build (a new enum v
 the file with the message below instead of failing with a parse error. Do the same when an older
 build would load the file but silently drop new fields on its next save.
 
-When you open an older file FilmCraft says so ("Upgraded project from schema v1 to v2"). The file
+When you open an older file Film Avelton says so ("Upgraded project from schema v1 to v2"). The file
 on disk is unchanged until you save. The **first save over it** keeps the original next to it as
-`<name> (schema v1 backup).fcproj`, so an older FilmCraft can still open your work.
+`<name> (schema v1 backup).fcproj`, so an older Film Avelton can still open your work.
 
 ### Newer files
 
 A file with a `schema_version` newer than the build supports is **refused**, not half-read:
 
-> this project was saved by a newer version of FilmCraft (project schema v12); this build reads up to
-> v11. Update FilmCraft to open it.
+> this project was saved by a newer version of Film Avelton (project schema v12); this build reads up to
+> v11. Update Film Avelton to open it.
 
 Reading it partially and saving it back would silently drop whatever the newer version added.
 
@@ -112,7 +112,7 @@ In the UI, Save / Save As / Save a Copy without a `path` show a file dialog.
 
 ## Auto Save
 
-Preferences ▸ Auto Save (Edit ▸ Preferences ▸ Auto Save…, ⌘,; FilmCraft ▸ Settings… on macOS) works
+Preferences ▸ Auto Save (Edit ▸ Preferences ▸ Auto Save…, ⌘,; Film Avelton ▸ Settings… on macOS) works
 like Premiere's:
 
 | Setting | Key | Default |
@@ -135,16 +135,16 @@ Preferences are stored in `<data dir>/preferences.json`. The `prefs.*` commands 
 
 ## Crash recovery
 
-Premiere's auto-save can lose up to one interval of work. FilmCraft also keeps a **recovery journal**:
+Premiere's auto-save can lose up to one interval of work. Film Avelton also keeps a **recovery journal**:
 
 - Whenever the project has unsaved changes, a snapshot is written to
   `<data dir>/Recovery/<started>-<pid>[-<n>]/snapshot.fcproj`, plus `session.json` (time, revision, project
   name and path). It is written about 1 s after the last edit, or after at most
   `recoveryIntervalSeconds` while edits keep coming. Saving the project deletes the snapshot.
-- Each running FilmCraft holds an OS file lock on `<session>/lock`. When the process dies (crash,
+- Each running Film Avelton holds an OS file lock on `<session>/lock`. When the process dies (crash,
   `kill -9`, power loss) the OS releases the lock.
 - At startup, every other session directory whose lock can be taken and that has a snapshot is a
-  recovery candidate. FilmCraft asks: *"FilmCraft quit unexpectedly while 'X' had unsaved changes.
+  recovery candidate. Film Avelton asks: *"Film Avelton quit unexpectedly while 'X' had unsaved changes.
   Recover unsaved changes from 2026-10-01 00:02:09?"*, with the buttons **Recover**, **Not Now** and
   **Discard**. Stale directories without a snapshot are removed. Journals of running sessions are
   never touched.
@@ -152,14 +152,14 @@ Premiere's auto-save can lose up to one interval of work. FilmCraft also keeps a
   over the original file. The recovered state goes into the new session's own journal before the old
   journal is deleted.
 - A normal quit with nothing unsaved removes the session directory. Quitting with unsaved changes
-  keeps the snapshot, marked `cleanExit`, and FilmCraft offers it on the next launch ("FilmCraft was
+  keeps the snapshot, marked `cleanExit`, and Film Avelton offers it on the next launch ("Film Avelton was
   closed while … had unsaved changes"). There is no "Save changes?" prompt on quit yet, so this
   keeps the work.
 
 Desktop flags: `--recover` recovers the newest candidate without asking. `--no-recover` starts
 without asking; the changes stay available through File ▸ Recover Unsaved Changes…. `--data-dir
 <dir>` (or `FILMCRAFT_DATA_DIR`) moves the data directory. The default is `~/Library/Application
-Support/FilmCraft` on macOS, `%APPDATA%\FilmCraft` on Windows, and `$XDG_DATA_HOME/filmcraft` or
+Support/Film Avelton` on macOS, `%APPDATA%\Film Avelton` on Windows, and `$XDG_DATA_HOME/filmcraft` or
 `~/.local/share/filmcraft` elsewhere. A `portable.txt` file next to the executable (the Windows
 portable zip ships one) makes it `data` next to the executable instead.
 
@@ -209,7 +209,7 @@ Every value is a dotted key whose first segment is its category: `timeline.still
 `labels.colors.rose.name`. `prefs.get` / `prefs.set` / `prefs.reset {category?}` reach them from the
 CLI, the control channel and MCP; `prefs.set` rejects values that are not one of a dropdown's
 choices. `prefs.schema {category?}` lists every category with its fields (label, kind, choices,
-range, unit, current value, and `wired`: whether FilmCraft acts on it yet). `app.settings.<category>`
+range, unit, current value, and `wired`: whether Film Avelton acts on it yet). `app.settings.<category>`
 opens the dialog on a page.
 
 | Category | Takes effect |

@@ -1,6 +1,6 @@
 [package]
 name = "filmcraft"
-description = "FilmCraft desktop app"
+description = "Film Avelton desktop app"
 version.workspace = true
 edition.workspace = true
 license.workspace = true

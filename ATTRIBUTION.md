@@ -25,24 +25,6 @@ iconography, images or other Adobe assets; open licences only; every asset attri
 | `docs/images/filmcraft-scopes.png` | FilmCraft contributors | Original work: FilmCraft UI crop (scopes of a Charade (1963) frame, public domain) | MIT OR Apache-2.0 |
 | `docs/images/filmcraft-effects.png` | FilmCraft contributors | Original work: FilmCraft screenshot crop; NASA Earth Views (US Government work, public domain) | MIT OR Apache-2.0; footage public domain |
 | `docs/images/filmcraft-timeline.png` | FilmCraft contributors | Original work: FilmCraft UI crop; thumbnails from Night of the Living Dead (1968) and Carnival of Souls (1962), CC0 Chopin waveform | MIT OR Apache-2.0; film frames public domain |
-| `assets/app-icon/filmcraft.svg` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; canonical vector | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `packaging/macos/dmg/background.svg` | @XusBadia | Original work: FilmCraft macOS DMG window background, derived from the FilmCraft app icon (`assets/app-icon/filmcraft.svg`); rendered to `background.tiff` by `packaging/macos/dmg/generate.py` | MIT OR Apache-2.0 (`LICENSE-MIT`, `LICENSE-APACHE`) |
-| `packaging/macos/dmg/background.tiff` | @XusBadia | Rendered from `packaging/macos/dmg/background.svg` by `packaging/macos/dmg/generate.py` | MIT OR Apache-2.0 (`LICENSE-MIT`, `LICENSE-APACHE`) |
-| `assets/app-icon/filmcraft-small.svg` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; lighter vector | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/filmcraft-1024.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; 1024 px render | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/filmcraft-macos-512.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; macOS runtime Dock icon (512 px) | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/filmcraft.icns` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; macOS .icns | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/filmcraft.ico` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Windows .ico (16-256 px) | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/16x16/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 16 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/24x24/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 24 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/32x32/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 32 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/48x48/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 48 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/64x64/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 64 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/128x128/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 128 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/256x256/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 256 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/512x512/apps/ai.storyteller.filmcraft.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme 512 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `assets/app-icon/hicolor/scalable/apps/ai.storyteller.filmcraft.svg` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; Linux hicolor theme scalable | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
-| `apps/filmcraft-web/web/favicon.png` | Brandon Thomas (FilmCraft owner) | Original work: FilmCraft app icon (owl with ear tufts), drawn by the owner in ArtCraft and vectorised; 128 px | MIT OR Apache-2.0 (`assets/app-icon/LICENSE.txt`) |
 
 ## Golden test images
 
@@ -133,14 +115,6 @@ remove them (AGENTS.md §1.8).
 
 | File | Author | Source | Licence |
 |---|---|---|---|
-| `docs/brand/artcraft-logo-white.png` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft wordmark, light ink for dark backgrounds) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-logo-white.svg` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft wordmark, light ink for dark backgrounds) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-logo.png` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft wordmark (symbol + "ARTCRAFT"), dark ink for light backgrounds) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-logo.svg` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft wordmark (symbol + "ARTCRAFT"), dark ink for light backgrounds) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-mark-black.png` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft symbol ("A" mark), black) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-mark-black.svg` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft symbol ("A" mark), black) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-mark.png` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft symbol ("A" mark), blue) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
-| `docs/brand/artcraft-mark.svg` | ArtCraft Team | Original work: first-party ArtCraft brand mark (ArtCraft symbol ("A" mark), blue) | ArtCraft trademark, not open source; `docs/brand/LICENSE-brand.txt` (not MIT/Apache) |
 
 ## Third-party source code
 
@@ -161,3 +135,37 @@ SHA-256 (`crates/speech/src/models.rs`, `docs/transcripts.md`).
 | Asset | Author | Source | Licence |
 |---|---|---|---|
 | Whisper tiny / base / small speech-recognition weights (`model.safetensors`, `config.json`, `generation_config.json`, `tokenizer.json`) | OpenAI | `https://huggingface.co/openai/whisper-{tiny,base,small}` (revisions `169d4a43…`, `e37978b9…`, `973afd24…`); weights released with `https://github.com/openai/whisper` | MIT (weights and code, github.com/openai/whisper); the Hugging Face conversion is labelled Apache-2.0 |
+
+## Avelton artwork
+
+| Asset | Author | Source | Licence |
+|---|---|---|---|
+| `assets/app-icon/LICENSE.txt` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/README.md` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft-1024.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft-macos-512.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft-small.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft.icns` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft.ico` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/filmcraft.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/128x128/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/16x16/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/24x24/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/256x256/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/32x32/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/48x48/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/512x512/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/64x64/apps/online.avelton.film.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `assets/app-icon/hicolor/scalable/apps/online.avelton.film.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/LICENSE.txt` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-logo-white.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-logo-white.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-logo.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-logo.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-mark-black.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-mark-black.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-mark.png` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `docs/brand/avelton-mark.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `packaging/macos/dmg/background.svg` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `packaging/macos/dmg/background.tiff` | Avelton contributors | Original geometric artwork; https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter outlines: OFL-1.1 | MIT OR Apache-2.0 |
+| `apps/filmcraft-web/web/favicon.png` | Avelton contributors | Original geometric artwork, Inter OFL-1.1 outlines | MIT OR Apache-2.0 |
