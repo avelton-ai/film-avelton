@@ -1,9 +1,6 @@
 name: Release
 'on':
   workflow_dispatch: {}
-  push:
-    branches:
-    - avelton/launch
 permissions:
   contents: read
 concurrency:
@@ -247,6 +244,7 @@ jobs:
     - windows
     - linux
     - web
+    - packaging
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -336,3 +334,5 @@ jobs:
         if-no-files-found: error
   quality:
     uses: ./.github/workflows/ci.yml
+  packaging:
+    uses: ./.github/workflows/packaging-lint.yml
