@@ -31,11 +31,11 @@ fn opengl_effects_fall_back_to_cpu_without_panicking() {
             matrix: Affine::IDENTITY,
             opacity: 1.0,
             blend: Blend::Normal,
-            fx: Some(filmcraft_render::plan::LayerFx {
+            fx: Some(Arc::new(filmcraft_render::plan::LayerFx {
                 size: (8, 8),
                 decimation: 1,
                 ops: vec![filmcraft_render::gpufx::FxOp::BrightnessContrast { br: 0.2, co: 1.0 }],
-            }),
+            })),
         }],
     };
     let cpu = execute_cpu(&plan).over_black_rgba8();
