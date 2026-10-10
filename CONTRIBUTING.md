@@ -1,4 +1,4 @@
-# Contributing to FilmCraft
+# Contributing to Film Avelton
 
 Thanks for helping. Before you start:
 

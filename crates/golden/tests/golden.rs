@@ -739,9 +739,15 @@ fn scenes_are_distinct() {
 // ---- GPU parity ----
 
 fn device() -> Option<(wgpu::Device, wgpu::Queue)> {
-    let instance = wgpu::Instance::default();
-    let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default())).ok()?;
-    pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())).ok()
+    let instance =
+        wgpu::Instance::new(wgpu::InstanceDescriptor { backends: wgpu::Backends::PRIMARY, ..wgpu::InstanceDescriptor::new_without_display_handle() });
+    let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()));
+    assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || adapter.is_ok(), "CI requires a Vulkan GPU adapter: {adapter:?}");
+    let adapter = adapter.ok()?;
+    eprintln!("GPU parity adapter: {:?}", adapter.get_info());
+    let device = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default()));
+    assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || device.is_ok(), "CI requires a GPU device: {device:?}");
+    device.ok()
 }
 
 #[test]

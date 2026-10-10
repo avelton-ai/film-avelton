@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=Film Avelton
+GenericName=Video Editor
+Comment=Edit video, color and sound
+Exec=film-avelton %F
+TryExec=film-avelton
+Icon=online.avelton.film
+Terminal=false
+StartupNotify=true
+StartupWMClass=online.avelton.film
+Categories=AudioVideo;Video;AudioVideoEditing;
+Keywords=video;editor;film;timeline;color;grading;nle;

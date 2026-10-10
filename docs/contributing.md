@@ -54,7 +54,7 @@ playback and codec speed, use `--release`.
 
 The desktop app writes its `log` records to standard error and to `Logs/filmcraft.log` in the data
 directory (`~/.local/share/filmcraft/Logs/` or `$XDG_DATA_HOME/filmcraft/Logs/` on Linux,
-`~/Library/Application Support/FilmCraft/Logs/` on macOS, `%APPDATA%\FilmCraft\Logs\` on Windows,
+`~/Library/Application Support/Film Avelton/Logs/` on macOS, `%APPDATA%\Film Avelton\Logs\` on Windows,
 or under `--data-dir` / `FILMCRAFT_DATA_DIR`), next to the crash logs; Help ▸ Reveal Log Files opens
 the folder. A start from a desktop menu or the Dock has no terminal, so this file is what to attach
 to a bug report: GPU compositor fallbacks, audio output problems, panicked frame jobs and container
@@ -62,7 +62,7 @@ warnings all land there. Each launch moves the previous log to `filmcraft.1.log`
 `filmcraft.2.log`), so the log of a run that crashed survives the next start. The file stops growing
 at 16 MiB. `--help`, `--version` and command-line errors write no file.
 
-By default FilmCraft's own crates log at `info` and everything else at `warn`. `RUST_LOG` replaces
+By default Film Avelton's own crates log at `info` and everything else at `warn`. `RUST_LOG` replaces
 that with env_logger-style directives, for example `RUST_LOG=debug`,
 `RUST_LOG=warn,filmcraft_codecs=trace` or `RUST_LOG=info,wgpu_core=warn`; a directive ending in `*`
 covers every target starting with it (`filmcraft*=debug`). The logger is
@@ -86,7 +86,7 @@ resolve from there. `crates/text/build.rs` reads its `fonts/manifest.txt` and em
 Regular, to keep the wasm small). The Japanese ones become the last fallback of every UI font family
 (`crates/ui-egui/src/theme.rs`, BIZ UDPGothic first) and fallback faces in the text engine (Gothic
 for sans text, Mincho for serif text). Without `CRAFT_FONTS_DIR`, `CRAFT_FONTS` is empty and
-FilmCraft uses its bundled and system fonts. A `CRAFT_FONTS_DIR` that is not a checkout is a build
+Film Avelton uses its bundled and system fonts. A `CRAFT_FONTS_DIR` that is not a checkout is a build
 warning, or an error with `CRAFT_FONTS_REQUIRED=1` (release builds set both). Tests on these fonts'
 glyphs skip when it is empty; when you touch fonts, run the gates both with and without it.
 
@@ -262,7 +262,7 @@ In short:
   traced or "inspired-by" copies.
 - Open licences only (MIT, Apache-2.0, BSD, ISC, zlib, OFL, CC0, CC BY, CC BY-SA, or your own
   work under MIT OR Apache-2.0). No NC or ND licences. If the licence is unclear, leave the asset out.
-- Screenshots show only FilmCraft (or other open projects) with media we generated or that is
+- Screenshots show only Film Avelton (or other open projects) with media we generated or that is
   openly licensed.
 
 - **Fonts live in [storytold/craft-fonts](https://github.com/storytold/craft-fonts), not here.**

@@ -1,6 +1,6 @@
 [package]
 name = "filmcraft-ui-egui"
-description = "The FilmCraft egui frontend (swappable): panels, docking, timeline, monitors, control channel"
+description = "The Film Avelton egui frontend (swappable): panels, docking, timeline, monitors, control channel"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -30,7 +30,7 @@ serde_json = { workspace = true }
 log = { workspace = true }
 rayon = { workspace = true }
 web-time = "1"
-# ArtCraft wordmark (PNG) for the About dialog and Home screen.
+# Avelton wordmark (PNG) for the About dialog and Home screen.
 image = { version = "0.25", default-features = false, features = ["png"] }
 
 # Thread/process CPU clocks for frame-job profiling (safe wrappers; see frames.rs).

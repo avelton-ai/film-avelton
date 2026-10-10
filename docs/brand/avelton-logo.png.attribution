@@ -1,0 +1,8 @@
+asset: docs/brand/avelton-logo.png
+title: Avelton original geometric identity
+author: Avelton contributors
+source: https://github.com/avelton-ai/avelton-infrastructure/blob/main/scripts/creative/rebrand.py; Inter lettering from bundled OFL-1.1 font
+license: MIT OR Apache-2.0
+license-file: LICENSE-MIT
+added: 2026-10-10
+notes: Original artwork generated from geometry, replacing upstream brand artwork.

@@ -4,9 +4,45 @@ use filmcraft_render::Blend;
 use filmcraft_render::plan::execute_cpu;
 
 fn device() -> Option<(wgpu::Device, wgpu::Queue)> {
-    let instance = wgpu::Instance::default();
-    let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default())).ok()?;
-    pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())).ok()
+    let instance =
+        wgpu::Instance::new(wgpu::InstanceDescriptor { backends: wgpu::Backends::PRIMARY, ..wgpu::InstanceDescriptor::new_without_display_handle() });
+    let adapter = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default()));
+    assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || adapter.is_ok(), "CI requires a Vulkan GPU adapter: {adapter:?}");
+    let adapter = adapter.ok()?;
+    eprintln!("GPU parity adapter: {:?}", adapter.get_info());
+    let device = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default()));
+    assert!(std::env::var_os("FILMCRAFT_REQUIRE_GPU").is_none() || device.is_ok(), "CI requires a GPU device: {device:?}");
+    device.ok()
+}
+
+#[test]
+fn opengl_effects_fall_back_to_cpu_without_panicking() {
+    let instance = wgpu::Instance::new(wgpu::InstanceDescriptor { backends: wgpu::Backends::GL, ..wgpu::InstanceDescriptor::new_without_display_handle() });
+    let Ok(adapter) = pollster::block_on(instance.request_adapter(&wgpu::RequestAdapterOptions::default())) else { return };
+    let Ok((dev, q)) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor::default())) else { return };
+    let mut c = GpuCompositor::new(&dev, &q);
+    assert!(c.fx.is_none());
+    let frame = Arc::new(VideoFrame::rgba8(8, 8, [255, 0, 0, 255].repeat(64)));
+    let plan = FramePlan::Layers {
+        width: 8,
+        height: 8,
+        layers: vec![PlanLayer {
+            frame,
+            matrix: Affine::IDENTITY,
+            opacity: 1.0,
+            blend: Blend::Normal,
+            fx: Some(Arc::new(filmcraft_render::plan::LayerFx {
+                size: (8, 8),
+                decimation: 1,
+                ops: vec![filmcraft_render::gpufx::FxOp::BrightnessContrast { br: 0.2, co: 1.0 }],
+            })),
+        }],
+    };
+    let cpu = execute_cpu(&plan).over_black_rgba8();
+    c.composite(&plan);
+    let (_, _, gpu) = c.read_output().expect("OpenGL fallback readback");
+    assert_eq!(cpu.len(), gpu.len());
+    assert!(cpu.iter().zip(&gpu).all(|(a, b)| a.abs_diff(*b) <= 2));
 }
 
 #[test]

@@ -181,10 +181,11 @@ fn steps(op: &FxOp) -> Vec<Step> {
 
 impl FxStage {
     /// Whether `device` can run the stage: compute shaders with 16×16 workgroups and a storage
-    /// texture (WebGL2-class devices can't; they render effects on the CPU).
+    /// texture. OpenGL has no portable Rgba32Float render target; use the CPU effects there.
     pub(crate) fn supported(device: &wgpu::Device) -> bool {
         let l = device.limits();
-        l.max_storage_textures_per_shader_stage >= 1
+        device.adapter_info().backend != wgpu::Backend::Gl
+            && l.max_storage_textures_per_shader_stage >= 1
             && l.max_compute_invocations_per_workgroup >= 256
             && l.max_compute_workgroup_size_x >= 64
             && l.max_compute_workgroup_size_y >= 16

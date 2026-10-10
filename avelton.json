@@ -1,0 +1,16 @@
+{
+  "name": "Film Avelton",
+  "slug": "film-avelton",
+  "domain": "film.avelton.online",
+  "app_id": "online.avelton.film",
+  "version": "0.5.0-avelton.1",
+  "upstream": {
+    "repository": "storytold/filmcraft",
+    "commit": "45936c1d6c0c4d0c569e044f646e333db6976cf1",
+    "installer_upgrade_code": "31E6FB14-9DBC-41DD-B24B-26B71FB31B62"
+  },
+  "release": {
+    "unsigned": true,
+    "channel": "alpha"
+  }
+}

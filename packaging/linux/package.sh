@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build and package FilmCraft for Linux (<arch> is x86_64 or aarch64):
+# Build and package Film Avelton for Linux (<arch> is x86_64 or aarch64):
 #
 #   $DIST/filmcraft-<version>-linux-<arch>.AppImage  any distro with glibc >= the build host's
 #   $DIST/filmcraft-<version>-linux-<arch>.AppImage.zsync  delta updates (needs zsyncmake)
@@ -17,7 +17,7 @@ set -euo pipefail
 # shellcheck source=../env.sh
 . "$(dirname "${BASH_SOURCE[0]}")/../env.sh"
 HERE="$ROOT/packaging/linux"
-APP_ID=ai.storyteller.filmcraft
+APP_ID=online.avelton.film
 
 SKIP_BUILD=0
 FORMATS="appimage deb rpm tar"
@@ -36,10 +36,10 @@ case "$ARCH" in
   aarch64 | arm64) ARCH=aarch64; DEB_ARCH=arm64 ;;
   *) echo "unsupported architecture $ARCH" >&2; exit 2 ;;
 esac
-export FILMCRAFT_MAINTAINER="${FILMCRAFT_MAINTAINER:-FilmCraft maintainers <filmcraft@storyteller.ai>}"
-BASENAME="filmcraft-$VERSION-linux-$ARCH"
+export FILMCRAFT_MAINTAINER="${FILMCRAFT_MAINTAINER:-Film Avelton maintainers <support@avelton.online>}"
+BASENAME="film-avelton-$VERSION-linux-$ARCH"
 
-echo "==> FilmCraft $VERSION for Linux $ARCH ($FORMATS)"
+echo "==> Film Avelton $VERSION for Linux $ARCH ($FORMATS)"
 
 if [ "$SKIP_BUILD" = 0 ]; then
   (cd "$ROOT" && cargo build --release --locked -p filmcraft -p filmcraft-cli)
@@ -50,9 +50,9 @@ STAGE="$WORK/root"
 rm -rf "$WORK"
 
 # ---- stage an FHS tree (shared by every format) -------------------------------------------------
-install -Dm755 "$BIN/filmcraft" "$STAGE/usr/bin/filmcraft"
-install -Dm755 "$BIN/filmcraft-cli" "$STAGE/usr/bin/filmcraft-cli"
-strip "$STAGE/usr/bin/filmcraft" "$STAGE/usr/bin/filmcraft-cli" 2>/dev/null || true
+install -Dm755 "$BIN/filmcraft" "$STAGE/usr/bin/film-avelton"
+install -Dm755 "$BIN/filmcraft-cli" "$STAGE/usr/bin/film-avelton-cli"
+strip "$STAGE/usr/bin/film-avelton" "$STAGE/usr/bin/film-avelton-cli" 2>/dev/null || true
 install -Dm644 "$HERE/$APP_ID.desktop" "$STAGE/usr/share/applications/$APP_ID.desktop"
 install -Dm644 "$HERE/$APP_ID.mime.xml" "$STAGE/usr/share/mime/packages/$APP_ID.xml"
 mkdir -p "$STAGE/usr/share/metainfo"
@@ -60,8 +60,8 @@ sed -e "s/@VERSION@/$VERSION/g" -e "s/@DATE@/$FILMCRAFT_BUILD_DATE/g" \
   "$HERE/$APP_ID.metainfo.xml.in" >"$STAGE/usr/share/metainfo/$APP_ID.metainfo.xml"
 mkdir -p "$STAGE/usr/share/icons"
 cp -R "$ROOT/assets/app-icon/hicolor" "$STAGE/usr/share/icons/"
-mkdir -p "$STAGE/usr/share/doc/filmcraft"
-copy_docs "$STAGE/usr/share/doc/filmcraft"
+mkdir -p "$STAGE/usr/share/doc/film-avelton"
+copy_docs "$STAGE/usr/share/doc/film-avelton"
 
 if command -v desktop-file-validate >/dev/null; then
   desktop-file-validate "$STAGE/usr/share/applications/$APP_ID.desktop"
@@ -95,10 +95,10 @@ fi
 
 # ---- AppImage -----------------------------------------------------------------------------------
 if has appimage; then
-  APPDIR="$WORK/FilmCraft.AppDir"
+  APPDIR="$WORK/Film Avelton.AppDir"
   cp -R "$STAGE" "$APPDIR"
   mv "$APPDIR/usr/share/doc" "$WORK/doc-unused"
-  ln -s usr/bin/filmcraft "$APPDIR/AppRun"
+  ln -s usr/bin/film-avelton "$APPDIR/AppRun"
   cp "$HERE/$APP_ID.desktop" "$APPDIR/$APP_ID.desktop"
   cp "$ROOT/assets/app-icon/hicolor/256x256/apps/$APP_ID.png" "$APPDIR/$APP_ID.png"
   ln -s "$APP_ID.png" "$APPDIR/.DirIcon"
@@ -123,7 +123,7 @@ if has appimage; then
   # each AppImage on GitHub Releases. `latest` is the newest published release that is not a
   # pre-release. A fork's builds point at its own releases through GITHUB_REPOSITORY.
   REPO="${GITHUB_REPOSITORY:-storytold/filmcraft}"
-  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|filmcraft-*-linux-$ARCH.AppImage.zsync"
+  UPDATE_INFO="gh-releases-zsync|${REPO%%/*}|${REPO#*/}|latest|film-avelton-*-linux-$ARCH.AppImage.zsync"
   # Extract-and-run: works without FUSE (containers, CI). The output embeds the static runtime,
   # so users don't need libfuse2 either. With zsyncmake on the host (CI installs the zsync
   # package) appimagetool also writes the .zsync, into its working directory, hence the cd.
@@ -136,6 +136,6 @@ if has appimage; then
   fi
 fi
 
-"$STAGE/usr/bin/filmcraft-cli" --version
+"$STAGE/usr/bin/film-avelton-cli" --version
 echo "==> done"
 ls -lh "$DIST"
